@@ -89,7 +89,9 @@
     "signupButton": "注册",
     "noAccount": "还没有账号？",
     "hasAccount": "已有账号？",
-    "socialLogin": "社交账号登录"
+    "socialLogin": "社交账号登录",
+    "signupSuccess": "注册成功！",
+    "signupConfirmEmail": "验证邮件已发送，请查收邮箱。"
   },
   "about": {
     "title": "QINMU 的故事",

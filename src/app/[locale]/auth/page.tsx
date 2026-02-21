@@ -48,8 +48,15 @@ export default function AuthPage() {
   const handleSignup = async (data: SignupFormData) => {
     setSuccess(null);
     try {
-      await signup(data.email, data.password, data.name);
-      setSuccess("✓");
+      const needsConfirmation = await signup(data.email, data.password, data.name);
+      if (needsConfirmation) {
+        setSuccess(t("signupConfirmEmail"));
+      } else {
+        setSuccess(t("signupSuccess"));
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 1000);
+      }
     } catch {
       // Error handled by store
     }

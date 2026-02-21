@@ -89,7 +89,9 @@
     "signupButton": "가입하기",
     "noAccount": "아직 회원이 아니신가요?",
     "hasAccount": "이미 회원이신가요?",
-    "socialLogin": "소셜 로그인"
+    "socialLogin": "소셜 로그인",
+    "signupSuccess": "회원가입이 완료되었습니다!",
+    "signupConfirmEmail": "인증 이메일을 발송했습니다. 이메일을 확인해주세요."
   },
   "about": {
     "title": "QINMU 이야기",

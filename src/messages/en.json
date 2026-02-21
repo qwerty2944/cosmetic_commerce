@@ -89,7 +89,9 @@
     "signupButton": "Sign Up",
     "noAccount": "Don't have an account?",
     "hasAccount": "Already have an account?",
-    "socialLogin": "Social Login"
+    "socialLogin": "Social Login",
+    "signupSuccess": "Sign up successful!",
+    "signupConfirmEmail": "We sent a confirmation email. Please check your inbox."
   },
   "about": {
     "title": "The QINMU Story",

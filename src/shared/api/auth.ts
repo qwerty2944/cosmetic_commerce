@@ -19,6 +19,7 @@ export interface AuthUser {
 
 export interface AuthResponse {
   user: AuthUser;
+  needsConfirmation?: boolean;
 }
 
 export const authApi = {

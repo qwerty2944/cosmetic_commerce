@@ -89,7 +89,9 @@
     "signupButton": "註冊",
     "noAccount": "還沒有帳號？",
     "hasAccount": "已有帳號？",
-    "socialLogin": "社群帳號登入"
+    "socialLogin": "社群帳號登入",
+    "signupSuccess": "註冊成功！",
+    "signupConfirmEmail": "驗證信已發送，請查收信箱。"
   },
   "about": {
     "title": "QINMU 的故事",

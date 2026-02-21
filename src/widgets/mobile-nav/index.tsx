@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Search, ShoppingBag, User, Grid3X3 } from "lucide-react";
+import { Home, ShoppingBag, User, Grid3X3 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/routing";
 import { cn } from "@/shared/lib/utils";
@@ -9,7 +9,6 @@ import { motion } from "framer-motion";
 const navItems = [
   { icon: Home, labelKey: "home", href: "/" },
   { icon: Grid3X3, labelKey: "products", href: "/products" },
-  { icon: Search, labelKey: "search", href: "/products" },
   { icon: ShoppingBag, labelKey: "cart", href: "/cart" },
   { icon: User, labelKey: "mypage", href: "/auth" },
 ] as const;

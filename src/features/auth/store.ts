@@ -9,7 +9,7 @@ interface AuthState {
   error: string | null;
 
   login: (email: string, password: string) => Promise<void>;
-  signup: (email: string, password: string, name: string) => Promise<void>;
+  signup: (email: string, password: string, name: string) => Promise<boolean>;
   logout: () => Promise<void>;
   fetchUser: () => Promise<void>;
   clearError: () => void;
@@ -40,6 +40,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     try {
       const { data } = await authApi.signup({ email, password, name });
       set({ user: data.user, loading: false });
+      return data.needsConfirmation ?? false;
     } catch (err: unknown) {
       const message =
         err instanceof Error
