@@ -2,10 +2,11 @@
 // 이름, 이메일, 비밀번호 입력 후 회원가입 요청
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Mail, Lock, User, Loader2, ArrowLeft } from "lucide-react";
+import { Mail, Lock, User, Loader2, ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import { signupSchema, type SignupFormData } from "@/features/auth/sign-up/schemas";
 import { signUp } from "@/features/auth/sign-up/store";
@@ -19,6 +20,8 @@ interface InfoStepProps {
 export function InfoStep({ onNext, onBack }: InfoStepProps) {
   const t = useTranslations("auth");
   const { loading, error } = useUserStore();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const form = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
@@ -40,6 +43,8 @@ export function InfoStep({ onNext, onBack }: InfoStepProps) {
 
   const inputClass =
     "w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all";
+  const passwordInputClass =
+    "w-full pl-11 pr-11 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all";
 
   return (
     <div className="space-y-4">
@@ -99,11 +104,18 @@ export function InfoStep({ onNext, onBack }: InfoStepProps) {
           <div className="relative">
             <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-subtext" />
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder={t("password")}
               {...form.register("password")}
-              className={inputClass}
+              className={passwordInputClass}
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-subtext hover:text-foreground transition-colors"
+            >
+              {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+            </button>
           </div>
           {form.formState.errors.password && (
             <p className="text-xs text-red-500 mt-1 ml-1">
@@ -116,11 +128,18 @@ export function InfoStep({ onNext, onBack }: InfoStepProps) {
           <div className="relative">
             <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-subtext" />
             <input
-              type="password"
+              type={showConfirmPassword ? "text" : "password"}
               placeholder={t("confirmPassword")}
               {...form.register("confirmPassword")}
-              className={inputClass}
+              className={passwordInputClass}
             />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-subtext hover:text-foreground transition-colors"
+            >
+              {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+            </button>
           </div>
           {form.formState.errors.confirmPassword && (
             <p className="text-xs text-red-500 mt-1 ml-1">

@@ -4,7 +4,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Lock, Loader2, CheckCircle } from "lucide-react";
+import { Mail, Lock, Loader2, CheckCircle, Eye, EyeOff } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,6 +18,7 @@ import { Link } from "@/application/i18n/routing";
 export function LoginForm() {
   const t = useTranslations("auth");
   const [success, setSuccess] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
   const { loading, error, clearError } = useUserStore();
 
   const form = useForm<LoginFormData>({
@@ -105,11 +106,18 @@ export function LoginForm() {
           <div className="relative">
             <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-subtext" />
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder={t("password")}
               {...form.register("password")}
-              className={inputClass}
+              className="w-full pl-11 pr-11 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all"
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-subtext hover:text-foreground transition-colors"
+            >
+              {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+            </button>
           </div>
           {form.formState.errors.password && (
             <p className="text-xs text-red-500 mt-1 ml-1">
