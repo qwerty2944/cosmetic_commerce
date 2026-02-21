@@ -45,8 +45,8 @@ export function useProductById(id: string) {
   return useQuery<Product | null>({
     queryKey: ["product", id],
     queryFn: async () => {
-      const { data } = await api.get<Product>(`/products/${id}`);
-      return data;
+      const { data } = await api.get<{ product: Product }>(`/products/${id}`);
+      return data.product;
     },
     enabled: !!id,
   });
