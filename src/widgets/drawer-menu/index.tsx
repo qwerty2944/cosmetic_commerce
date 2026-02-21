@@ -24,6 +24,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Link, useRouter, usePathname } from "@/i18n/routing";
 import { localeNames, type Locale } from "@/shared/config/i18n";
 import { cn } from "@/shared/lib/utils";
+import { useDrawerStore } from "@/shared/lib/drawer-store";
 
 const categoryIcons: Record<string, React.ElementType> = {
   Droplets,
@@ -47,20 +48,17 @@ const categories = [
   { slug: "sets", icon: "Gift" },
 ];
 
-interface DrawerMenuProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-export function DrawerMenu({ isOpen, onClose }: DrawerMenuProps) {
+export function DrawerMenu() {
   const t = useTranslations();
   const locale = useLocale() as Locale;
   const router = useRouter();
   const pathname = usePathname();
+  const { isOpen, close } = useDrawerStore();
 
-  // Prevent body scroll when drawer is open
+  // Prevent body scroll when drawer is open (mobile only)
   useEffect(() => {
-    if (isOpen) {
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    if (isOpen && !isDesktop) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -72,7 +70,7 @@ export function DrawerMenu({ isOpen, onClose }: DrawerMenuProps) {
 
   const handleLocaleChange = (newLocale: Locale) => {
     router.replace(pathname, { locale: newLocale });
-    onClose();
+    close();
   };
 
   const navItems = [
@@ -87,13 +85,13 @@ export function DrawerMenu({ isOpen, onClose }: DrawerMenuProps) {
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Overlay */}
+          {/* Overlay (mobile only - hidden on lg via CSS) */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="drawer-overlay"
-            onClick={onClose}
+            onClick={close}
           />
 
           {/* Panel */}
@@ -114,7 +112,7 @@ export function DrawerMenu({ isOpen, onClose }: DrawerMenuProps) {
                 <p className="text-[10px] text-gray-400 tracking-wider">沁木國際</p>
               </div>
               <button
-                onClick={onClose}
+                onClick={close}
                 className="p-2 rounded-full hover:bg-gray-50 transition-colors"
               >
                 <X className="w-5 h-5" />
@@ -130,7 +128,7 @@ export function DrawerMenu({ isOpen, onClose }: DrawerMenuProps) {
                     <li key={item.href}>
                       <Link
                         href={item.href}
-                        onClick={onClose}
+                        onClick={close}
                         className={cn(
                           "flex items-center gap-3 px-4 py-3 rounded-xl transition-colors",
                           isActive
@@ -153,14 +151,14 @@ export function DrawerMenu({ isOpen, onClose }: DrawerMenuProps) {
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-4">
                 {t("common.products")}
               </p>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-4 lg:grid-cols-3 gap-2">
                 {categories.map((cat) => {
                   const Icon = categoryIcons[cat.icon];
                   return (
                     <Link
                       key={cat.slug}
                       href={`/products?category=${cat.slug}`}
-                      onClick={onClose}
+                      onClick={close}
                       className="flex flex-col items-center gap-1.5 p-3 rounded-xl hover:bg-gray-50 transition-colors"
                     >
                       <div className="w-10 h-10 rounded-full bg-primary-light flex items-center justify-center">

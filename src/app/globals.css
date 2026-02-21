@@ -83,21 +83,30 @@
     @apply sticky bottom-0 z-50 bg-white/95 backdrop-blur-md border-t border-gray-100;
   }
 
-  /* Drawer overlay */
+  /* Drawer overlay - mobile only (desktop drawer goes into side banner area) */
   .drawer-overlay {
     @apply fixed inset-0 bg-black/40 z-[60];
   }
 
-  /* Drawer panel */
+  @media (min-width: 1024px) {
+    .drawer-overlay {
+      display: none;
+    }
+  }
+
+  /* Drawer panel - mobile: full-screen slide from left */
   .drawer-panel {
     @apply fixed top-0 bottom-0 left-0 z-[70] bg-white overflow-y-auto;
     width: var(--app-max-width);
     max-width: 100vw;
   }
 
+  /* Drawer panel - desktop: appears in the side banner area */
   @media (min-width: 1024px) {
     .drawer-panel {
-      left: calc(var(--side-banner-width) + ((100vw - var(--side-banner-width) - var(--app-max-width)) / 2));
+      left: 0;
+      width: var(--side-banner-width);
+      z-index: 50;
     }
   }
 }

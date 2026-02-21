@@ -7,11 +7,13 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { DrawerMenu } from "@/widgets/drawer-menu";
 import { useCartStore } from "@/features/cart/store";
+import { useDrawerStore } from "@/shared/lib/drawer-store";
+
 export function Header() {
   const t = useTranslations();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const cartCount = useCartStore((s) => s.getTotalItems());
+  const openDrawer = useDrawerStore((s) => s.open);
 
   return (
     <>
@@ -20,7 +22,7 @@ export function Header() {
           <div className="flex items-center justify-between h-14">
             {/* Hamburger */}
             <button
-              onClick={() => setIsDrawerOpen(true)}
+              onClick={openDrawer}
               className="p-2 -ml-2 rounded-full hover:bg-gray-50 transition-colors"
             >
               <Menu className="w-5 h-5 text-foreground" />
@@ -87,7 +89,7 @@ export function Header() {
       </header>
 
       {/* Drawer Menu */}
-      <DrawerMenu isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
+      <DrawerMenu />
     </>
   );
 }
