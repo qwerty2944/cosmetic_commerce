@@ -7,8 +7,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail, Lock, User, Loader2, ArrowLeft } from "lucide-react";
 import { Button } from "@/shared/ui/button";
-import { signupSchema, type SignupFormData } from "@/features/sign-up/schemas";
-import { signUp } from "@/features/sign-up/store";
+import { signupSchema, type SignupFormData } from "@/features/auth/sign-up/schemas";
+import { signUp } from "@/features/auth/sign-up/store";
 import { useUserStore } from "@/entities/user/store";
 
 interface InfoStepProps {

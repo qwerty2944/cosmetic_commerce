@@ -2,9 +2,9 @@
 
 import { useFunnel } from "@use-funnel/next";
 import { motion } from "framer-motion";
-import { TermsStep } from "@/features/sign-up/ui/terms-step";
-import { InfoStep } from "@/features/sign-up/ui/info-step";
-import { CompleteStep } from "@/features/sign-up/ui/complete-step";
+import { TermsStep } from "@/features/auth/sign-up/ui/terms-step";
+import { InfoStep } from "@/features/auth/sign-up/ui/info-step";
+import { CompleteStep } from "@/features/auth/sign-up/ui/complete-step";
 
 type SignupFunnel = {
   terms: { termsAgreed: boolean; privacyAgreed: boolean };

@@ -8,8 +8,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/shared/ui/button";
 import { useUserStore } from "@/entities/user/store";
-import { signIn } from "@/features/sign-in/store";
-import { loginSchema, type LoginFormData } from "@/features/sign-in/schemas";
+import { signIn } from "@/features/auth/sign-in/store";
+import { loginSchema, type LoginFormData } from "@/features/auth/sign-in/schemas";
 import { authApi } from "@/shared/api";
 import { Link } from "@/application/i18n/routing";
 
