@@ -1,0 +1,106 @@
+{
+  "common": {
+    "home": "首页",
+    "products": "商品",
+    "cart": "购物车",
+    "mypage": "我的",
+    "search": "搜索",
+    "login": "登录",
+    "signup": "注册",
+    "logout": "退出",
+    "about": "品牌介绍",
+    "all": "全部",
+    "viewMore": "查看更多",
+    "addToCart": "加入购物车",
+    "buyNow": "立即购买",
+    "won": "韩元",
+    "quantity": "数量",
+    "total": "合计",
+    "checkout": "结算",
+    "continueShopping": "继续购物",
+    "emptyCart": "购物车为空",
+    "language": "语言"
+  },
+  "header": {
+    "searchPlaceholder": "搜索商品...",
+    "logo": "BLOOMING"
+  },
+  "hero": {
+    "slide1Title": "绽放你的\n美丽时光",
+    "slide1Subtitle": "高端韩妆护肤系列",
+    "slide1Cta": "查看系列",
+    "slide2Title": "春季新品\n特别优惠",
+    "slide2Subtitle": "最高40%折扣 + 免费配送",
+    "slide2Cta": "立即购买",
+    "slide3Title": "源自自然的\n纯净成分",
+    "slide3Subtitle": "纯素 & 清洁美妆系列",
+    "slide3Cta": "了解更多"
+  },
+  "categories": {
+    "skincare": "护肤",
+    "makeup": "彩妆",
+    "bodycare": "身体护理",
+    "haircare": "头发护理",
+    "fragrance": "香水",
+    "suncare": "防晒",
+    "masks": "面膜",
+    "sets": "套装"
+  },
+  "sections": {
+    "bestSellers": "热销商品",
+    "bestSellersDesc": "最受欢迎的商品",
+    "newArrivals": "新品上市",
+    "newArrivalsDesc": "发现新品",
+    "reviews": "真实评价",
+    "reviewsDesc": "来自顾客的真实评价",
+    "brandStory": "品牌故事",
+    "brandStoryTitle": "自然之美\n献给你",
+    "brandStoryDesc": "BLOOMING是一个以自然为灵感，采用纯净成分打造的韩妆品牌。我们相信每一种肌肤都能绽放属于自己的美丽。",
+    "brandStoryPoint1": "100%纯素 & 零残忍",
+    "brandStoryPoint2": "95%以上天然来源成分",
+    "brandStoryPoint3": "皮肤科专家测试"
+  },
+  "footer": {
+    "company": "公司介绍",
+    "terms": "服务条款",
+    "privacy": "隐私政策",
+    "cs": "客服中心",
+    "csHours": "工作日 09:00 - 18:00 (韩国时间)",
+    "email": "help@blooming.kr",
+    "phone": "+82-1588-0000",
+    "copyright": "© 2026 BLOOMING. All rights reserved.",
+    "address": "首尔特别市江南区德黑兰路123"
+  },
+  "product": {
+    "details": "商品详情",
+    "reviews": "评价",
+    "shipping": "配送信息",
+    "freeShipping": "满30,000韩元免配送费",
+    "deliveryTime": "2-3天内配送"
+  },
+  "auth": {
+    "loginTitle": "登录",
+    "signupTitle": "注册",
+    "email": "邮箱",
+    "password": "密码",
+    "confirmPassword": "确认密码",
+    "name": "姓名",
+    "loginButton": "登录",
+    "signupButton": "注册",
+    "noAccount": "还没有账号？",
+    "hasAccount": "已有账号？",
+    "socialLogin": "社交账号登录"
+  },
+  "about": {
+    "title": "BLOOMING 的故事",
+    "mission": "我们的使命",
+    "missionDesc": "以来自自然的纯净成分提供最好的护肤品，让每个人都能对自己的肌肤充满自信。",
+    "values": "我们的价值观",
+    "value1": "自然主义",
+    "value1Desc": "我们只使用来自自然的纯净原料。",
+    "value2": "透明",
+    "value2Desc": "我们公开所有成分和制造过程。",
+    "value3": "可持续性",
+    "value3Desc": "我们追求与地球共存的环保美妆。"
+  }
+}

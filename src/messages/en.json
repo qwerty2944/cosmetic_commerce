@@ -1,0 +1,106 @@
+{
+  "common": {
+    "home": "Home",
+    "products": "Products",
+    "cart": "Cart",
+    "mypage": "My Page",
+    "search": "Search",
+    "login": "Login",
+    "signup": "Sign Up",
+    "logout": "Logout",
+    "about": "About",
+    "all": "All",
+    "viewMore": "View More",
+    "addToCart": "Add to Cart",
+    "buyNow": "Buy Now",
+    "won": "KRW",
+    "quantity": "Qty",
+    "total": "Total",
+    "checkout": "Checkout",
+    "continueShopping": "Continue Shopping",
+    "emptyCart": "Your cart is empty",
+    "language": "Language"
+  },
+  "header": {
+    "searchPlaceholder": "Search products...",
+    "logo": "BLOOMING"
+  },
+  "hero": {
+    "slide1Title": "Time to Bloom\nYour Beauty",
+    "slide1Subtitle": "Premium K-Beauty Skincare Collection",
+    "slide1Cta": "View Collection",
+    "slide2Title": "Spring New Arrivals\nSpecial Sale",
+    "slide2Subtitle": "Up to 40% off + Free Shipping",
+    "slide2Cta": "Shop Now",
+    "slide3Title": "Pure Ingredients\nFrom Nature",
+    "slide3Subtitle": "Vegan & Clean Beauty Lineup",
+    "slide3Cta": "Learn More"
+  },
+  "categories": {
+    "skincare": "Skincare",
+    "makeup": "Makeup",
+    "bodycare": "Body Care",
+    "haircare": "Hair Care",
+    "fragrance": "Fragrance",
+    "suncare": "Sun Care",
+    "masks": "Masks",
+    "sets": "Sets"
+  },
+  "sections": {
+    "bestSellers": "Best Sellers",
+    "bestSellersDesc": "Most loved products",
+    "newArrivals": "New Arrivals",
+    "newArrivalsDesc": "Discover what's new",
+    "reviews": "Real Reviews",
+    "reviewsDesc": "Honest reviews from our customers",
+    "brandStory": "Brand Story",
+    "brandStoryTitle": "Nature's Beauty\nFor You",
+    "brandStoryDesc": "BLOOMING is a K-beauty brand made with pure, nature-inspired ingredients. We believe every skin can bloom into its own unique beauty.",
+    "brandStoryPoint1": "100% Vegan & Cruelty-Free",
+    "brandStoryPoint2": "95%+ Naturally Derived Ingredients",
+    "brandStoryPoint3": "Dermatologist Tested"
+  },
+  "footer": {
+    "company": "About Us",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "cs": "Customer Service",
+    "csHours": "Mon-Fri 09:00 - 18:00 KST",
+    "email": "help@blooming.kr",
+    "phone": "+82-1588-0000",
+    "copyright": "© 2026 BLOOMING. All rights reserved.",
+    "address": "123 Teheran-ro, Gangnam-gu, Seoul"
+  },
+  "product": {
+    "details": "Details",
+    "reviews": "Reviews",
+    "shipping": "Shipping",
+    "freeShipping": "Free shipping over ₩30,000",
+    "deliveryTime": "Delivery in 2-3 days"
+  },
+  "auth": {
+    "loginTitle": "Login",
+    "signupTitle": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "name": "Name",
+    "loginButton": "Login",
+    "signupButton": "Sign Up",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "socialLogin": "Social Login"
+  },
+  "about": {
+    "title": "The BLOOMING Story",
+    "mission": "Our Mission",
+    "missionDesc": "To provide the best skincare with pure, nature-derived ingredients so everyone can feel confident in their own skin.",
+    "values": "Our Values",
+    "value1": "Naturalism",
+    "value1Desc": "We use only pure ingredients derived from nature.",
+    "value2": "Transparency",
+    "value2Desc": "We openly share all ingredients and manufacturing processes.",
+    "value3": "Sustainability",
+    "value3Desc": "We pursue eco-friendly beauty together with the earth."
+  }
+}

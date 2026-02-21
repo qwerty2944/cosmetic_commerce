@@ -1,0 +1,106 @@
+{
+  "common": {
+    "home": "홈",
+    "products": "상품",
+    "cart": "장바구니",
+    "mypage": "마이페이지",
+    "search": "검색",
+    "login": "로그인",
+    "signup": "회원가입",
+    "logout": "로그아웃",
+    "about": "브랜드 소개",
+    "all": "전체",
+    "viewMore": "더보기",
+    "addToCart": "장바구니 담기",
+    "buyNow": "바로 구매",
+    "won": "원",
+    "quantity": "수량",
+    "total": "합계",
+    "checkout": "결제하기",
+    "continueShopping": "쇼핑 계속하기",
+    "emptyCart": "장바구니가 비어있습니다",
+    "language": "언어"
+  },
+  "header": {
+    "searchPlaceholder": "상품을 검색해보세요",
+    "logo": "BLOOMING"
+  },
+  "hero": {
+    "slide1Title": "당신의 아름다움을\n꽃피우는 시간",
+    "slide1Subtitle": "프리미엄 K-뷰티 스킨케어 컬렉션",
+    "slide1Cta": "컬렉션 보기",
+    "slide2Title": "봄 신상품\n특별 할인",
+    "slide2Subtitle": "최대 40% 할인 + 무료 배송",
+    "slide2Cta": "지금 쇼핑하기",
+    "slide3Title": "자연에서 찾은\n순수한 성분",
+    "slide3Subtitle": "비건 & 클린 뷰티 라인업",
+    "slide3Cta": "더 알아보기"
+  },
+  "categories": {
+    "skincare": "스킨케어",
+    "makeup": "메이크업",
+    "bodycare": "바디케어",
+    "haircare": "헤어케어",
+    "fragrance": "향수",
+    "suncare": "선케어",
+    "masks": "마스크팩",
+    "sets": "세트/기획전"
+  },
+  "sections": {
+    "bestSellers": "베스트셀러",
+    "bestSellersDesc": "가장 사랑받는 인기 상품",
+    "newArrivals": "신상품",
+    "newArrivalsDesc": "새롭게 만나보세요",
+    "reviews": "리얼 후기",
+    "reviewsDesc": "고객님들의 솔직한 후기",
+    "brandStory": "브랜드 스토리",
+    "brandStoryTitle": "자연의 아름다움을\n당신에게",
+    "brandStoryDesc": "BLOOMING은 자연에서 영감을 받아 순수한 성분으로 만든 K-뷰티 브랜드입니다. 우리는 모든 피부가 자신만의 아름다움을 꽃피울 수 있다고 믿습니다.",
+    "brandStoryPoint1": "100% 비건 & 크루얼티 프리",
+    "brandStoryPoint2": "자연 유래 성분 95% 이상",
+    "brandStoryPoint3": "피부과 전문의 테스트 완료"
+  },
+  "footer": {
+    "company": "회사소개",
+    "terms": "이용약관",
+    "privacy": "개인정보처리방침",
+    "cs": "고객센터",
+    "csHours": "평일 09:00 - 18:00",
+    "email": "help@blooming.kr",
+    "phone": "1588-0000",
+    "copyright": "© 2026 BLOOMING. All rights reserved.",
+    "address": "서울특별시 강남구 테헤란로 123"
+  },
+  "product": {
+    "details": "상품 상세",
+    "reviews": "리뷰",
+    "shipping": "배송 정보",
+    "freeShipping": "3만원 이상 무료배송",
+    "deliveryTime": "2-3일 이내 배송"
+  },
+  "auth": {
+    "loginTitle": "로그인",
+    "signupTitle": "회원가입",
+    "email": "이메일",
+    "password": "비밀번호",
+    "confirmPassword": "비밀번호 확인",
+    "name": "이름",
+    "loginButton": "로그인",
+    "signupButton": "가입하기",
+    "noAccount": "아직 회원이 아니신가요?",
+    "hasAccount": "이미 회원이신가요?",
+    "socialLogin": "소셜 로그인"
+  },
+  "about": {
+    "title": "BLOOMING 이야기",
+    "mission": "우리의 미션",
+    "missionDesc": "모든 사람이 자신의 피부에 자신감을 가질 수 있도록, 자연에서 찾은 순수한 성분으로 최고의 스킨케어를 제공합니다.",
+    "values": "우리의 가치",
+    "value1": "자연주의",
+    "value1Desc": "자연에서 유래한 순수한 원료만을 사용합니다.",
+    "value2": "투명함",
+    "value2Desc": "모든 성분과 제조 과정을 투명하게 공개합니다.",
+    "value3": "지속가능성",
+    "value3Desc": "지구와 함께하는 친환경 뷰티를 추구합니다."
+  }
+}
