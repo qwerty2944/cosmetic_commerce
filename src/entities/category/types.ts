@@ -1,3 +1,4 @@
+// 카테고리 엔티티 타입 정의
 export interface Category {
   id: string;
   name_ko: string;

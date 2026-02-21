@@ -1,3 +1,6 @@
+// 상품 엔티티 타입 정의
+// LocalizedString: 다국어 지원을 위한 로케일별 문자열 (jsonb)
+
 export interface LocalizedString {
   ko: string;
   en: string;

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Star,
@@ -16,9 +17,10 @@ import { useTranslations, useLocale } from "next-intl";
 import { useParams } from "next/navigation";
 import { Button } from "@/shared/ui/button";
 import { Badge } from "@/shared/ui/badge";
-import { mockProducts, mockReviews } from "@/shared/lib/mock-data";
+import { mockReviews } from "@/shared/lib/mock-data";
+import { useProductStore } from "@/entities/product/store";
 import { formatPrice, getDiscountPercent } from "@/shared/lib/utils";
-import { Link } from "@/i18n/routing";
+import { Link } from "@/application/i18n/routing";
 import type { Locale } from "@/shared/config/i18n";
 
 export default function ProductDetailPage() {
@@ -26,8 +28,27 @@ export default function ProductDetailPage() {
   const locale = useLocale() as Locale;
   const params = useParams();
   const [quantity, setQuantity] = useState(1);
+  const { currentProduct: product, loading, fetchProductById, clearCurrentProduct } = useProductStore();
 
-  const product = mockProducts.find((p) => p.id === params.id);
+  useEffect(() => {
+    if (params.id) {
+      fetchProductById(params.id as string);
+    }
+    return () => clearCurrentProduct();
+  }, [params.id, fetchProductById, clearCurrentProduct]);
+
+  if (loading) {
+    return (
+      <div className="px-4 py-4">
+        <div className="aspect-square rounded-3xl bg-gray-100 animate-pulse mb-6" />
+        <div className="space-y-3">
+          <div className="h-6 bg-gray-100 rounded animate-pulse w-3/4" />
+          <div className="h-4 bg-gray-100 rounded animate-pulse w-1/2" />
+          <div className="h-8 bg-gray-100 rounded animate-pulse w-1/3" />
+        </div>
+      </div>
+    );
+  }
 
   if (!product) {
     return (
@@ -50,6 +71,7 @@ export default function ProductDetailPage() {
   const productReviews = mockReviews.filter(
     (r) => r.product_id === product.id
   );
+  const imageUrl = product.images?.[0];
 
   return (
     <div className="px-4 py-4">
@@ -69,12 +91,23 @@ export default function ProductDetailPage() {
           animate={{ opacity: 1, x: 0 }}
           className="relative aspect-square rounded-3xl bg-gray-50 overflow-hidden"
         >
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center text-gray-300">
-              <ShoppingBag className="w-20 h-20 mx-auto mb-4 opacity-30" />
-              <span className="text-sm opacity-50">{name}</span>
+          {imageUrl ? (
+            <Image
+              src={imageUrl}
+              alt={name}
+              fill
+              className="object-cover"
+              sizes="480px"
+              unoptimized
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center text-gray-300">
+                <ShoppingBag className="w-20 h-20 mx-auto mb-4 opacity-30" />
+                <span className="text-sm opacity-50">{name}</span>
+              </div>
             </div>
-          </div>
+          )}
           <div className="absolute top-4 left-4 flex flex-col gap-2">
             {product.is_best && (
               <Badge variant="best" className="text-xs">

@@ -1,10 +1,11 @@
+// 앱 프로바이더 — 앱 초기화 시 사용자 세션 복원
 "use client";
 
 import { useEffect } from "react";
-import { useAuthStore } from "@/features/auth/store";
+import { useUserStore } from "@/entities/user/store";
 
 function AuthInitializer({ children }: { children: React.ReactNode }) {
-  const fetchUser = useAuthStore((s) => s.fetchUser);
+  const fetchUser = useUserStore((s) => s.fetchUser);
 
   useEffect(() => {
     fetchUser();

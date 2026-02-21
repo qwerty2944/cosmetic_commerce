@@ -1,20 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { SlidersHorizontal } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ProductCard } from "@/entities/product";
-import { mockProducts, mockCategories } from "@/shared/lib/mock-data";
+import { mockCategories } from "@/shared/lib/mock-data";
+import { useProductStore } from "@/entities/product/store";
 import { cn } from "@/shared/lib/utils";
 
 export default function ProductsPage() {
   const t = useTranslations();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const { products, loading, fetchProducts } = useProductStore();
 
-  const filteredProducts = selectedCategory
-    ? mockProducts.filter((p) => p.category_id === selectedCategory)
-    : mockProducts;
+  useEffect(() => {
+    fetchProducts(
+      selectedCategory ? { category_id: selectedCategory } : undefined
+    );
+  }, [selectedCategory, fetchProducts]);
 
   return (
     <div className="px-4 py-6">
@@ -64,13 +68,24 @@ export default function ProductsPage() {
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-2 gap-3">
-        {filteredProducts.map((product, idx) => (
-          <ProductCard key={product.id} product={product} index={idx} />
-        ))}
-      </div>
+      {loading ? (
+        <div className="grid grid-cols-2 gap-3">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div
+              key={i}
+              className="aspect-square rounded-2xl bg-gray-100 animate-pulse"
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-3">
+          {products.map((product, idx) => (
+            <ProductCard key={product.id} product={product} index={idx} />
+          ))}
+        </div>
+      )}
 
-      {filteredProducts.length === 0 && (
+      {!loading && products.length === 0 && (
         <div className="text-center py-20">
           <p className="text-subtext">No products found.</p>
         </div>

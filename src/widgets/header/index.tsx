@@ -4,9 +4,9 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, Search, ShoppingBag, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/routing";
+import { Link } from "@/application/i18n/routing";
 import { DrawerMenu } from "@/widgets/drawer-menu";
-import { useCartStore } from "@/features/cart/store";
+import { useCartStore } from "@/features/manage-cart/store";
 import { useDrawerStore } from "@/shared/lib/drawer-store";
 
 export function Header() {

@@ -1,62 +1,36 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Lock, User, Loader2, CheckCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import { Mail, Lock, Loader2, CheckCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/shared/ui/button";
-import { cn } from "@/shared/lib/utils";
-import { useAuthStore } from "@/features/auth/store";
-import {
-  loginSchema,
-  signupSchema,
-  type LoginFormData,
-  type SignupFormData,
-} from "@/features/auth/schemas";
+import { useUserStore } from "@/entities/user/store";
+import { signIn } from "@/features/sign-in/store";
+import { loginSchema, type LoginFormData } from "@/features/sign-in/schemas";
 import { authApi } from "@/shared/api";
+import { Link } from "@/application/i18n/routing";
 
 export default function AuthPage() {
   const t = useTranslations("auth");
-  const [isLogin, setIsLogin] = useState(true);
   const [success, setSuccess] = useState<string | null>(null);
 
-  const { login, signup, loading, error, clearError } = useAuthStore();
+  const { loading, error, clearError } = useUserStore();
 
   const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: { email: "", password: "" },
   });
 
-  const signupForm = useForm<SignupFormData>({
-    resolver: zodResolver(signupSchema),
-    defaultValues: { name: "", email: "", password: "", confirmPassword: "" },
-  });
-
   const handleLogin = async (data: LoginFormData) => {
     setSuccess(null);
+    clearError();
     try {
-      await login(data.email, data.password);
+      await signIn(data.email, data.password);
       setSuccess(t("loginButton") + " ✓");
       window.location.href = "/";
-    } catch {
-      // Error handled by store
-    }
-  };
-
-  const handleSignup = async (data: SignupFormData) => {
-    setSuccess(null);
-    try {
-      const needsConfirmation = await signup(data.email, data.password, data.name);
-      if (needsConfirmation) {
-        setSuccess(t("signupConfirmEmail"));
-      } else {
-        setSuccess(t("signupSuccess"));
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 1000);
-      }
     } catch {
       // Error handled by store
     }
@@ -71,43 +45,17 @@ export default function AuthPage() {
     }
   };
 
-  const switchMode = () => {
-    setIsLogin(!isLogin);
-    clearError();
-    setSuccess(null);
-    loginForm.reset();
-    signupForm.reset();
-  };
-
   return (
-    <div className="min-h-[calc(100vh-200px)] flex items-center justify-center px-4 py-8">
+    <div className="min-h-[calc(100dvh-200px)] flex items-center justify-center px-4 py-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full"
       >
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-          {/* Tab Switch */}
-          <div className="flex mb-6 bg-gray-50 rounded-full p-1">
-            <button
-              onClick={() => { setIsLogin(true); clearError(); setSuccess(null); }}
-              className={cn(
-                "flex-1 py-2.5 rounded-full text-sm font-medium transition-all",
-                isLogin ? "bg-primary text-white shadow-sm" : "text-subtext"
-              )}
-            >
-              {t("loginTitle")}
-            </button>
-            <button
-              onClick={() => { setIsLogin(false); clearError(); setSuccess(null); }}
-              className={cn(
-                "flex-1 py-2.5 rounded-full text-sm font-medium transition-all",
-                !isLogin ? "bg-primary text-white shadow-sm" : "text-subtext"
-              )}
-            >
-              {t("signupTitle")}
-            </button>
-          </div>
+          <h1 className="text-xl font-bold text-center mb-6">
+            {t("loginTitle")}
+          </h1>
 
           {/* Error Message */}
           {error && (
@@ -132,157 +80,57 @@ export default function AuthPage() {
             </motion.div>
           )}
 
-          <AnimatePresence mode="wait">
-            {isLogin ? (
-              <motion.form
-                key="login"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.2 }}
-                className="space-y-4"
-                onSubmit={loginForm.handleSubmit(handleLogin)}
-              >
-                <div>
-                  <div className="relative">
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-subtext" />
-                    <input
-                      type="email"
-                      placeholder={t("email")}
-                      {...loginForm.register("email")}
-                      className="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all"
-                    />
-                  </div>
-                  {loginForm.formState.errors.email && (
-                    <p className="text-xs text-red-500 mt-1 ml-1">
-                      {loginForm.formState.errors.email.message}
-                    </p>
-                  )}
-                </div>
+          <form
+            className="space-y-4"
+            onSubmit={loginForm.handleSubmit(handleLogin)}
+          >
+            <div>
+              <div className="relative">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-subtext" />
+                <input
+                  type="email"
+                  placeholder={t("email")}
+                  {...loginForm.register("email")}
+                  className="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all"
+                />
+              </div>
+              {loginForm.formState.errors.email && (
+                <p className="text-xs text-red-500 mt-1 ml-1">
+                  {loginForm.formState.errors.email.message}
+                </p>
+              )}
+            </div>
 
-                <div>
-                  <div className="relative">
-                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-subtext" />
-                    <input
-                      type="password"
-                      placeholder={t("password")}
-                      {...loginForm.register("password")}
-                      className="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all"
-                    />
-                  </div>
-                  {loginForm.formState.errors.password && (
-                    <p className="text-xs text-red-500 mt-1 ml-1">
-                      {loginForm.formState.errors.password.message}
-                    </p>
-                  )}
-                </div>
+            <div>
+              <div className="relative">
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-subtext" />
+                <input
+                  type="password"
+                  placeholder={t("password")}
+                  {...loginForm.register("password")}
+                  className="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all"
+                />
+              </div>
+              {loginForm.formState.errors.password && (
+                <p className="text-xs text-red-500 mt-1 ml-1">
+                  {loginForm.formState.errors.password.message}
+                </p>
+              )}
+            </div>
 
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full rounded-xl mt-2"
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                  ) : (
-                    t("loginButton")
-                  )}
-                </Button>
-              </motion.form>
-            ) : (
-              <motion.form
-                key="signup"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.2 }}
-                className="space-y-4"
-                onSubmit={signupForm.handleSubmit(handleSignup)}
-              >
-                <div>
-                  <div className="relative">
-                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-subtext" />
-                    <input
-                      type="text"
-                      placeholder={t("name")}
-                      {...signupForm.register("name")}
-                      className="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all"
-                    />
-                  </div>
-                  {signupForm.formState.errors.name && (
-                    <p className="text-xs text-red-500 mt-1 ml-1">
-                      {signupForm.formState.errors.name.message}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <div className="relative">
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-subtext" />
-                    <input
-                      type="email"
-                      placeholder={t("email")}
-                      {...signupForm.register("email")}
-                      className="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all"
-                    />
-                  </div>
-                  {signupForm.formState.errors.email && (
-                    <p className="text-xs text-red-500 mt-1 ml-1">
-                      {signupForm.formState.errors.email.message}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <div className="relative">
-                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-subtext" />
-                    <input
-                      type="password"
-                      placeholder={t("password")}
-                      {...signupForm.register("password")}
-                      className="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all"
-                    />
-                  </div>
-                  {signupForm.formState.errors.password && (
-                    <p className="text-xs text-red-500 mt-1 ml-1">
-                      {signupForm.formState.errors.password.message}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <div className="relative">
-                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-subtext" />
-                    <input
-                      type="password"
-                      placeholder={t("confirmPassword")}
-                      {...signupForm.register("confirmPassword")}
-                      className="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all"
-                    />
-                  </div>
-                  {signupForm.formState.errors.confirmPassword && (
-                    <p className="text-xs text-red-500 mt-1 ml-1">
-                      {signupForm.formState.errors.confirmPassword.message}
-                    </p>
-                  )}
-                </div>
-
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full rounded-xl mt-2"
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                  ) : (
-                    t("signupButton")
-                  )}
-                </Button>
-              </motion.form>
-            )}
-          </AnimatePresence>
+            <Button
+              type="submit"
+              size="lg"
+              className="w-full rounded-xl mt-2"
+              disabled={loading}
+            >
+              {loading ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                t("loginButton")
+              )}
+            </Button>
+          </form>
 
           {/* Divider */}
           <div className="flex items-center gap-4 my-6">
@@ -308,13 +156,13 @@ export default function AuthPage() {
           </div>
 
           <p className="text-center text-sm text-subtext mt-6">
-            {isLogin ? t("noAccount") : t("hasAccount")}{" "}
-            <button
-              onClick={switchMode}
+            {t("noAccount")}{" "}
+            <Link
+              href="/auth/signup"
               className="text-primary font-medium hover:underline"
             >
-              {isLogin ? t("signupTitle") : t("loginTitle")}
-            </button>
+              {t("signupTitle")}
+            </Link>
           </p>
         </div>
       </motion.div>

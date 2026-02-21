@@ -1,3 +1,4 @@
+// 리뷰 엔티티 타입 정의
 export interface Review {
   id: string;
   product_id: string;
