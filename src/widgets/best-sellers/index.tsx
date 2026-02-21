@@ -1,19 +1,32 @@
-// 베스트셀러 위젯 — props로 데이터 받아 렌더링
+// 베스트셀러 위젯 — React Query로 자체 데이터 캐싱
 "use client";
 
 import { useTranslations } from "next-intl";
 import { Section } from "@/shared/ui/section";
 import { ProductCard } from "@/entities/product";
-import type { Product } from "@/entities/product/types";
+import { useProducts } from "@/entities/product/api/use-products";
 import { Link } from "@/application/i18n/routing";
 import { ArrowRight } from "lucide-react";
 
-interface BestSellersProps {
-  products: Product[];
-}
-
-export function BestSellers({ products }: BestSellersProps) {
+export function BestSellers() {
   const t = useTranslations("sections");
+  const { data, isLoading } = useProducts({ is_best: true, limit: 8 });
+  const products = data?.products ?? [];
+
+  if (isLoading) {
+    return (
+      <Section title={t("bestSellers")} subtitle={t("bestSellersDesc")}>
+        <div className="grid grid-cols-2 gap-3">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div
+              key={i}
+              className="aspect-square rounded-2xl bg-gray-100 animate-pulse"
+            />
+          ))}
+        </div>
+      </Section>
+    );
+  }
 
   if (products.length === 0) return null;
 

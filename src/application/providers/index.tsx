@@ -1,8 +1,9 @@
-// 앱 프로바이더 — 앱 초기화 시 사용자 세션 복원
+// 앱 프로바이더 — React Query + 사용자 세션 복원
 "use client";
 
 import { useEffect } from "react";
 import { useUserStore } from "@/entities/user/store";
+import { QueryProvider } from "./query-provider";
 
 function AuthInitializer({ children }: { children: React.ReactNode }) {
   const fetchUser = useUserStore((s) => s.fetchUser);
@@ -16,8 +17,8 @@ function AuthInitializer({ children }: { children: React.ReactNode }) {
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
-    <AuthInitializer>
-      {children}
-    </AuthInitializer>
+    <QueryProvider>
+      <AuthInitializer>{children}</AuthInitializer>
+    </QueryProvider>
   );
 }

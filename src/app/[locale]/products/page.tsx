@@ -1,8 +1,7 @@
-// 상품 목록 페이지 — 서버 컴포넌트 (SSR)
+// 상품 목록 페이지 — 서버는 레이아웃만, 데이터는 React Query 캐싱
 import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
-import { getProducts } from "@/shared/lib/product-queries";
-import { ProductGrid } from "@/entities/product/ui/product-grid";
+import { ProductListContent } from "@/entities/product/ui/product-list-content";
 import { ProductFilters } from "@/widgets/product-filters";
 import type { Metadata } from "next";
 
@@ -19,20 +18,6 @@ export default async function ProductsPage({
   const params = await searchParams;
   const t = await getTranslations();
 
-  let products: Awaited<ReturnType<typeof getProducts>>["products"] = [];
-  let fetchError: string | null = null;
-
-  try {
-    const result = await getProducts({
-      category_id: params.category,
-      search: params.search,
-    });
-    products = result.products;
-  } catch (err) {
-    console.error("[ProductsPage] Failed to fetch products:", err);
-    fetchError = err instanceof Error ? err.message : String(err);
-  }
-
   return (
     <div className="px-4 py-6">
       {/* Page Header */}
@@ -43,21 +28,13 @@ export default async function ProductsPage({
         <p className="text-subtext mt-1">{t("sections.bestSellersDesc")}</p>
       </div>
 
-      {fetchError && (
-        <div className="mb-4 bg-red-50 border border-red-200 rounded-xl p-4">
-          <p className="text-xs font-mono text-red-700 break-all">
-            [ProductsPage] {fetchError}
-          </p>
-        </div>
-      )}
-
       {/* Filters (클라이언트) */}
       <Suspense>
         <ProductFilters />
       </Suspense>
 
-      {/* Product Grid */}
-      <ProductGrid products={products} />
+      {/* Product Grid — React Query 캐싱 */}
+      <ProductListContent category={params.category} search={params.search} />
     </div>
   );
 }
