@@ -1,5 +1,6 @@
+// 상품 상세 API — 서비스 레이어 호출
 import { NextRequest, NextResponse } from "next/server";
-import { createSupabaseServer } from "@/shared/lib/supabase-server";
+import { findProductById } from "@/entities/product/api/product.service";
 
 export async function GET(
   _request: NextRequest,
@@ -7,15 +8,9 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const supabase = await createSupabaseServer();
+    const product = await findProductById(id);
 
-    const { data: product, error } = await supabase
-      .from("products")
-      .select("*")
-      .eq("id", id)
-      .single();
-
-    if (error || !product) {
+    if (!product) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 });
     }
 

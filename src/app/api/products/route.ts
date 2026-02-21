@@ -1,51 +1,21 @@
+// 상품 목록 API — 서비스 레이어 호출
 import { NextRequest, NextResponse } from "next/server";
-import { createSupabaseServer } from "@/shared/lib/supabase-server";
+import { findProducts } from "@/entities/product/api/product.service";
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const categoryId = searchParams.get("category_id");
-    const search = searchParams.get("search");
-    const isBest = searchParams.get("is_best");
-    const isNew = searchParams.get("is_new");
-    const limit = parseInt(searchParams.get("limit") || "50");
-    const offset = parseInt(searchParams.get("offset") || "0");
 
-    const supabase = await createSupabaseServer();
+    const result = await findProducts({
+      category_id: searchParams.get("category_id") ?? undefined,
+      search: searchParams.get("search") ?? undefined,
+      is_best: searchParams.get("is_best") === "true" || undefined,
+      is_new: searchParams.get("is_new") === "true" || undefined,
+      limit: parseInt(searchParams.get("limit") || "50"),
+      offset: parseInt(searchParams.get("offset") || "0"),
+    });
 
-    let query = supabase
-      .from("products")
-      .select("*", { count: "exact" });
-
-    if (categoryId) {
-      query = query.eq("category_id", categoryId);
-    }
-
-    if (search) {
-      query = query.or(
-        `name->>'ko'.ilike.%${search}%,name->>'en'.ilike.%${search}%`
-      );
-    }
-
-    if (isBest === "true") {
-      query = query.eq("is_best", true);
-    }
-
-    if (isNew === "true") {
-      query = query.eq("is_new", true);
-    }
-
-    query = query
-      .order("created_at", { ascending: false })
-      .range(offset, offset + limit - 1);
-
-    const { data: products, count, error } = await query;
-
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
-
-    return NextResponse.json({ products: products ?? [], total: count ?? 0 });
+    return NextResponse.json(result);
   } catch {
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
