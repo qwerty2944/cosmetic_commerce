@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/shared/ui/button";
-import { Link } from "@/i18n/routing";
+import { Link } from "@/application/i18n/routing";
 import { formatPrice } from "@/shared/lib/utils";
 
 export default function CartPage() {

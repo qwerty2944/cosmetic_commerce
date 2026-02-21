@@ -1,7 +1,7 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { routing } from "@/i18n/routing";
+import { routing } from "@/application/i18n/routing";
 import { Header } from "@/widgets/header";
 import { Footer } from "@/widgets/footer";
 import { MobileNav } from "@/widgets/mobile-nav";

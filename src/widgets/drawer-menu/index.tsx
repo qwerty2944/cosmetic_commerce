@@ -21,7 +21,7 @@ import {
   Gift,
 } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
-import { Link, useRouter, usePathname } from "@/i18n/routing";
+import { Link, useRouter, usePathname } from "@/application/i18n/routing";
 import { localeNames, type Locale } from "@/shared/config/i18n";
 import { cn } from "@/shared/lib/utils";
 import { useDrawerStore } from "@/shared/lib/drawer-store";

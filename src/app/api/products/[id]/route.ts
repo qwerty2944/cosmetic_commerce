@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { mockProducts } from "@/shared/lib/mock-data";
+import { createSupabaseServer } from "@/shared/lib/supabase-server";
 
 export async function GET(
   _request: NextRequest,
@@ -7,9 +7,15 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const product = mockProducts.find((p) => p.id === id);
+    const supabase = await createSupabaseServer();
 
-    if (!product) {
+    const { data: product, error } = await supabase
+      .from("products")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+    if (error || !product) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 });
     }
 

@@ -2,7 +2,7 @@
 
 import { Home, ShoppingBag, User, Grid3X3 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Link, usePathname } from "@/i18n/routing";
+import { Link, usePathname } from "@/application/i18n/routing";
 import { cn } from "@/shared/lib/utils";
 import { motion } from "framer-motion";
 

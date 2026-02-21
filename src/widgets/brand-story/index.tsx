@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Leaf, Shield, Heart } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/routing";
+import { Link } from "@/application/i18n/routing";
 
 export function BrandStory() {
   const t = useTranslations("sections");

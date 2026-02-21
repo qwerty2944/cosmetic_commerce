@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { mockProducts } from "@/shared/lib/mock-data";
+import { createSupabaseServer } from "@/shared/lib/supabase-server";
 
 export async function GET(request: NextRequest) {
   try {
@@ -11,33 +11,41 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get("limit") || "50");
     const offset = parseInt(searchParams.get("offset") || "0");
 
-    let filtered = [...mockProducts];
+    const supabase = await createSupabaseServer();
+
+    let query = supabase
+      .from("products")
+      .select("*", { count: "exact" });
 
     if (categoryId) {
-      filtered = filtered.filter((p) => p.category_id === categoryId);
+      query = query.eq("category_id", categoryId);
     }
 
     if (search) {
-      const q = search.toLowerCase();
-      filtered = filtered.filter(
-        (p) =>
-          p.name.ko.toLowerCase().includes(q) ||
-          p.name.en.toLowerCase().includes(q)
+      query = query.or(
+        `name->>'ko'.ilike.%${search}%,name->>'en'.ilike.%${search}%`
       );
     }
 
     if (isBest === "true") {
-      filtered = filtered.filter((p) => p.is_best);
+      query = query.eq("is_best", true);
     }
 
     if (isNew === "true") {
-      filtered = filtered.filter((p) => p.is_new);
+      query = query.eq("is_new", true);
     }
 
-    const total = filtered.length;
-    const products = filtered.slice(offset, offset + limit);
+    query = query
+      .order("created_at", { ascending: false })
+      .range(offset, offset + limit - 1);
 
-    return NextResponse.json({ products, total });
+    const { data: products, count, error } = await query;
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ products: products ?? [], total: count ?? 0 });
   } catch {
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }

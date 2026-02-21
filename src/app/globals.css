@@ -59,7 +59,7 @@
   .app-shell {
     position: relative;
     max-width: var(--app-max-width);
-    min-height: 100vh;
+    min-height: 100dvh;
     margin: 0 auto;
     background: var(--background);
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);

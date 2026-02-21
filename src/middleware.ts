@@ -1,5 +1,5 @@
 import createMiddleware from "next-intl/middleware";
-import { routing } from "./i18n/routing";
+import { routing } from "./application/i18n/routing";
 import { NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 

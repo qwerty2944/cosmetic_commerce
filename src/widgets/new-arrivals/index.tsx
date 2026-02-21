@@ -1,15 +1,25 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Section } from "@/shared/ui/section";
 import { ProductCard } from "@/entities/product";
-import { mockProducts } from "@/shared/lib/mock-data";
-import { Link } from "@/i18n/routing";
+import type { Product } from "@/entities/product/types";
+import { productsApi } from "@/shared/api";
+import { Link } from "@/application/i18n/routing";
 import { ArrowRight } from "lucide-react";
 
 export function NewArrivals() {
   const t = useTranslations("sections");
-  const newProducts = mockProducts.filter((p) => p.is_new);
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    productsApi.list({ is_new: true }).then(({ data }) => {
+      setProducts(data.products);
+    });
+  }, []);
+
+  if (products.length === 0) return null;
 
   return (
     <Section
@@ -18,7 +28,7 @@ export function NewArrivals() {
       className="bg-gray-50/50"
     >
       <div className="grid grid-cols-2 gap-3">
-        {newProducts.map((product, idx) => (
+        {products.map((product, idx) => (
           <ProductCard key={product.id} product={product} index={idx} />
         ))}
       </div>

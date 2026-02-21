@@ -1,20 +1,30 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Section } from "@/shared/ui/section";
 import { ProductCard } from "@/entities/product";
-import { mockProducts } from "@/shared/lib/mock-data";
-import { Link } from "@/i18n/routing";
+import type { Product } from "@/entities/product/types";
+import { productsApi } from "@/shared/api";
+import { Link } from "@/application/i18n/routing";
 import { ArrowRight } from "lucide-react";
 
 export function BestSellers() {
   const t = useTranslations("sections");
-  const bestProducts = mockProducts.filter((p) => p.is_best);
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    productsApi.list({ is_best: true }).then(({ data }) => {
+      setProducts(data.products);
+    });
+  }, []);
+
+  if (products.length === 0) return null;
 
   return (
     <Section title={t("bestSellers")} subtitle={t("bestSellersDesc")}>
       <div className="grid grid-cols-2 gap-3">
-        {bestProducts.map((product, idx) => (
+        {products.map((product, idx) => (
           <ProductCard key={product.id} product={product} index={idx} />
         ))}
       </div>

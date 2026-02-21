@@ -5,7 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/routing";
+import { Link } from "@/application/i18n/routing";
 import { cn } from "@/shared/lib/utils";
 
 const slides = [
@@ -78,10 +78,10 @@ export function HeroBanner() {
                     {selectedIndex === idx && (
                       <motion.div
                         key={idx}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.5 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
                         className="max-w-lg"
                       >
                         <h2 className="text-2xl font-bold text-foreground leading-tight whitespace-pre-line mb-3">
