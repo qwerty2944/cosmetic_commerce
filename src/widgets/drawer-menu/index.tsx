@@ -55,10 +55,9 @@ export function DrawerMenu() {
   const pathname = usePathname();
   const { isOpen, close } = useDrawerStore();
 
-  // Prevent body scroll when drawer is open (mobile only)
+  // Prevent body scroll when drawer is open
   useEffect(() => {
-    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
-    if (isOpen && !isDesktop) {
+    if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
