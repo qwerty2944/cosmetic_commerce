@@ -20,6 +20,7 @@ export default async function ProductsPage({
   const t = await getTranslations();
 
   let products: Awaited<ReturnType<typeof getProducts>>["products"] = [];
+  let fetchError: string | null = null;
 
   try {
     const result = await getProducts({
@@ -29,6 +30,7 @@ export default async function ProductsPage({
     products = result.products;
   } catch (err) {
     console.error("[ProductsPage] Failed to fetch products:", err);
+    fetchError = err instanceof Error ? err.message : String(err);
   }
 
   return (
@@ -40,6 +42,14 @@ export default async function ProductsPage({
         </h1>
         <p className="text-subtext mt-1">{t("sections.bestSellersDesc")}</p>
       </div>
+
+      {fetchError && (
+        <div className="mb-4 bg-red-50 border border-red-200 rounded-xl p-4">
+          <p className="text-xs font-mono text-red-700 break-all">
+            [ProductsPage] {fetchError}
+          </p>
+        </div>
+      )}
 
       {/* Filters (클라이언트) */}
       <Suspense>
