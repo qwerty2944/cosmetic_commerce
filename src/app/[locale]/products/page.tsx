@@ -17,14 +17,14 @@ export default function ProductsPage() {
     : mockProducts;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="px-4 py-6">
       {/* Page Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="mb-8"
       >
-        <h1 className="text-2xl md:text-3xl font-bold text-foreground">
+        <h1 className="text-xl font-bold text-foreground">
           {t("common.products")}
         </h1>
         <p className="text-subtext mt-1">{t("sections.bestSellersDesc")}</p>
@@ -64,7 +64,7 @@ export default function ProductsPage() {
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+      <div className="grid grid-cols-2 gap-3">
         {filteredProducts.map((product, idx) => (
           <ProductCard key={product.id} product={product} index={idx} />
         ))}

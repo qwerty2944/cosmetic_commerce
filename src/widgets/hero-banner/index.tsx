@@ -69,11 +69,11 @@ export function HeroBanner() {
             <div key={idx} className="flex-[0_0_100%] min-w-0">
               <div
                 className={cn(
-                  "relative h-[400px] md:h-[520px] bg-gradient-to-r",
+                  "relative h-[320px] bg-gradient-to-r",
                   slide.gradient
                 )}
               >
-                <div className="max-w-7xl mx-auto px-4 h-full flex items-center">
+                <div className="px-4 h-full flex items-center">
                   <AnimatePresence mode="wait">
                     {selectedIndex === idx && (
                       <motion.div
@@ -84,10 +84,10 @@ export function HeroBanner() {
                         transition={{ duration: 0.5 }}
                         className="max-w-lg"
                       >
-                        <h2 className="text-3xl md:text-5xl font-bold text-foreground leading-tight whitespace-pre-line mb-4">
+                        <h2 className="text-2xl font-bold text-foreground leading-tight whitespace-pre-line mb-3">
                           {t(slide.titleKey)}
                         </h2>
-                        <p className="text-base md:text-lg text-subtext mb-6">
+                        <p className="text-sm text-subtext mb-4">
                           {t(slide.subtitleKey)}
                         </p>
                         <Link
@@ -105,9 +105,8 @@ export function HeroBanner() {
                 </div>
 
                 {/* Decorative circles */}
-                <div className="absolute right-0 top-0 w-1/2 h-full hidden md:block">
-                  <div className="absolute right-20 top-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-white/30 blur-xl" />
-                  <div className="absolute right-40 top-1/3 w-40 h-40 rounded-full bg-white/20 blur-lg" />
+                <div className="absolute right-0 top-0 w-1/2 h-full">
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-white/30 blur-xl" />
                 </div>
               </div>
             </div>
@@ -118,15 +117,15 @@ export function HeroBanner() {
       {/* Navigation Arrows */}
       <button
         onClick={scrollPrev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-md hover:bg-white transition-colors hidden md:flex"
+        className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-md hover:bg-white transition-colors"
       >
-        <ChevronLeft className="w-5 h-5 text-foreground" />
+        <ChevronLeft className="w-4 h-4 text-foreground" />
       </button>
       <button
         onClick={scrollNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-md hover:bg-white transition-colors hidden md:flex"
+        className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-md hover:bg-white transition-colors"
       >
-        <ChevronRight className="w-5 h-5 text-foreground" />
+        <ChevronRight className="w-4 h-4 text-foreground" />
       </button>
 
       {/* Dots */}

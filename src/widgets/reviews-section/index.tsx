@@ -26,7 +26,7 @@ export function ReviewsSection() {
 
   return (
     <Section title={t("reviews")} subtitle={t("reviewsDesc")}>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+      <div className="grid grid-cols-1 gap-3">
         {mockReviews.slice(0, 6).map((review, idx) => (
           <motion.div
             key={review.id}

@@ -31,7 +31,7 @@ export default function ProductDetailPage() {
 
   if (!product) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-20 text-center">
+      <div className="px-4 py-20 text-center">
         <p className="text-subtext">Product not found</p>
         <Link href="/products" className="text-primary mt-4 inline-block">
           <ArrowLeft className="w-4 h-4 inline mr-1" />
@@ -52,7 +52,7 @@ export default function ProductDetailPage() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6 md:py-10">
+    <div className="px-4 py-4">
       {/* Back link */}
       <Link
         href="/products"
@@ -62,7 +62,7 @@ export default function ProductDetailPage() {
         {t("common.products")}
       </Link>
 
-      <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+      <div className="space-y-6">
         {/* Product Image */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -102,7 +102,7 @@ export default function ProductDetailPage() {
           className="space-y-6"
         >
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+            <h1 className="text-xl font-bold text-foreground mb-2">
               {name}
             </h1>
             <div className="flex items-center gap-2">

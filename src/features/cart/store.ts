@@ -1,68 +1,74 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export interface CartItem {
   productId: string;
   quantity: number;
 }
 
-let cartItems: CartItem[] = [];
-let listeners: (() => void)[] = [];
-
-function emitChange() {
-  listeners.forEach((l) => l());
+interface CartState {
+  items: CartItem[];
+  addToCart: (productId: string, quantity?: number) => void;
+  removeFromCart: (productId: string) => void;
+  updateQuantity: (productId: string, quantity: number) => void;
+  clearCart: () => void;
+  getCartCount: () => number;
+  getTotalItems: () => number;
 }
 
-export function useCart() {
-  const [, setTick] = useState(0);
+export const useCartStore = create<CartState>()(
+  persist(
+    (set, get) => ({
+      items: [],
 
-  useEffect(() => {
-    const listener = () => setTick((t) => t + 1);
-    listeners.push(listener);
-    return () => {
-      listeners = listeners.filter((l) => l !== listener);
-    };
-  }, []);
+      addToCart: (productId, quantity = 1) => {
+        set((state) => {
+          const existing = state.items.find((item) => item.productId === productId);
+          if (existing) {
+            return {
+              items: state.items.map((item) =>
+                item.productId === productId
+                  ? { ...item, quantity: item.quantity + quantity }
+                  : item
+              ),
+            };
+          }
+          return { items: [...state.items, { productId, quantity }] };
+        });
+      },
 
-  const addToCart = useCallback((productId: string, quantity: number = 1) => {
-    const existing = cartItems.find((item) => item.productId === productId);
-    if (existing) {
-      existing.quantity += quantity;
-    } else {
-      cartItems.push({ productId, quantity });
-    }
-    emitChange();
-  }, []);
+      removeFromCart: (productId) => {
+        set((state) => ({
+          items: state.items.filter((item) => item.productId !== productId),
+        }));
+      },
 
-  const removeFromCart = useCallback((productId: string) => {
-    cartItems = cartItems.filter((item) => item.productId !== productId);
-    emitChange();
-  }, []);
-
-  const updateQuantity = useCallback(
-    (productId: string, quantity: number) => {
-      const item = cartItems.find((i) => i.productId === productId);
-      if (item) {
-        item.quantity = Math.max(0, quantity);
-        if (item.quantity === 0) {
-          removeFromCart(productId);
+      updateQuantity: (productId, quantity) => {
+        if (quantity <= 0) {
+          get().removeFromCart(productId);
+          return;
         }
-        emitChange();
-      }
-    },
-    [removeFromCart]
-  );
+        set((state) => ({
+          items: state.items.map((item) =>
+            item.productId === productId ? { ...item, quantity } : item
+          ),
+        }));
+      },
 
-  const getCartCount = useCallback(() => {
-    return cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  }, []);
+      clearCart: () => set({ items: [] }),
 
-  return {
-    items: cartItems,
-    addToCart,
-    removeFromCart,
-    updateQuantity,
-    getCartCount,
-  };
-}
+      getCartCount: () => {
+        return get().items.length;
+      },
+
+      getTotalItems: () => {
+        return get().items.reduce((sum, item) => sum + item.quantity, 0);
+      },
+    }),
+    {
+      name: "qinmu-cart",
+    }
+  )
+);

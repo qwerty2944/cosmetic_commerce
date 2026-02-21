@@ -34,10 +34,10 @@ export function CategoryNav() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="py-8 md:py-12"
+      className="py-6"
     >
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-4 md:grid-cols-8 gap-4 md:gap-6">
+      <div className="px-4">
+        <div className="grid grid-cols-4 gap-3">
           {categories.map((cat, idx) => (
             <motion.div
               key={cat.slug}
@@ -50,10 +50,10 @@ export function CategoryNav() {
                 href={`/products?category=${cat.slug}`}
                 className="flex flex-col items-center gap-2 group"
               >
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-primary-light flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300 group-hover:scale-110">
-                  <cat.icon className="w-6 h-6 md:w-7 md:h-7 text-primary group-hover:text-white transition-colors" />
+                <div className="w-12 h-12 rounded-2xl bg-primary-light flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300 group-hover:scale-110">
+                  <cat.icon className="w-5 h-5 text-primary group-hover:text-white transition-colors" />
                 </div>
-                <span className="text-xs md:text-sm text-foreground font-medium text-center">
+                <span className="text-[11px] text-foreground font-medium text-center">
                   {t(cat.key)}
                 </span>
               </Link>

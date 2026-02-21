@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "BLOOMING - Premium K-Beauty",
-  description: "Premium Korean Beauty & Skincare",
+  title: "QINMU 沁木國際 - Premium K-Beauty",
+  description: "Premium Korean Beauty & Skincare by QINMU",
 };
 
 export default function RootLayout({

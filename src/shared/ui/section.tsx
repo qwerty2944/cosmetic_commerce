@@ -17,18 +17,18 @@ export function Section({ children, className, title, subtitle }: SectionProps) 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6 }}
-      className={cn("py-12 md:py-16", className)}
+      className={cn("py-8", className)}
     >
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="px-4">
         {(title || subtitle) && (
-          <div className="text-center mb-8 md:mb-10">
+          <div className="text-center mb-6">
             {title && (
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+              <h2 className="text-xl font-bold text-foreground mb-1">
                 {title}
               </h2>
             )}
             {subtitle && (
-              <p className="text-subtext text-sm md:text-base">{subtitle}</p>
+              <p className="text-subtext text-sm">{subtitle}</p>
             )}
           </div>
         )}

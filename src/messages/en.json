@@ -23,10 +23,10 @@
   },
   "header": {
     "searchPlaceholder": "Search products...",
-    "logo": "BLOOMING"
+    "logo": "QINMU"
   },
   "hero": {
-    "slide1Title": "Time to Bloom\nYour Beauty",
+    "slide1Title": "Pure Beauty\nFrom Nature",
     "slide1Subtitle": "Premium K-Beauty Skincare Collection",
     "slide1Cta": "View Collection",
     "slide2Title": "Spring New Arrivals\nSpecial Sale",
@@ -55,7 +55,7 @@
     "reviewsDesc": "Honest reviews from our customers",
     "brandStory": "Brand Story",
     "brandStoryTitle": "Nature's Beauty\nFor You",
-    "brandStoryDesc": "BLOOMING is a K-beauty brand made with pure, nature-inspired ingredients. We believe every skin can bloom into its own unique beauty.",
+    "brandStoryDesc": "QINMU (沁木) is a K-beauty brand crafted with pure, nature-inspired ingredients. We believe the deep resonance of nature seeps into your skin, allowing everyone to bloom into their own unique beauty.",
     "brandStoryPoint1": "100% Vegan & Cruelty-Free",
     "brandStoryPoint2": "95%+ Naturally Derived Ingredients",
     "brandStoryPoint3": "Dermatologist Tested"
@@ -66,9 +66,9 @@
     "privacy": "Privacy Policy",
     "cs": "Customer Service",
     "csHours": "Mon-Fri 09:00 - 18:00 KST",
-    "email": "help@blooming.kr",
+    "email": "help@qinmu.kr",
     "phone": "+82-1588-0000",
-    "copyright": "© 2026 BLOOMING. All rights reserved.",
+    "copyright": "© 2026 QINMU 沁木國際. All rights reserved.",
     "address": "123 Teheran-ro, Gangnam-gu, Seoul"
   },
   "product": {
@@ -92,7 +92,7 @@
     "socialLogin": "Social Login"
   },
   "about": {
-    "title": "The BLOOMING Story",
+    "title": "The QINMU Story",
     "mission": "Our Mission",
     "missionDesc": "To provide the best skincare with pure, nature-derived ingredients so everyone can feel confident in their own skin.",
     "values": "Our Values",

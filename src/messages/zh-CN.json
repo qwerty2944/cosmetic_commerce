@@ -23,10 +23,10 @@
   },
   "header": {
     "searchPlaceholder": "搜索商品...",
-    "logo": "BLOOMING"
+    "logo": "QINMU"
   },
   "hero": {
-    "slide1Title": "绽放你的\n美丽时光",
+    "slide1Title": "自然赋予的\n纯净之美",
     "slide1Subtitle": "高端韩妆护肤系列",
     "slide1Cta": "查看系列",
     "slide2Title": "春季新品\n特别优惠",
@@ -55,7 +55,7 @@
     "reviewsDesc": "来自顾客的真实评价",
     "brandStory": "品牌故事",
     "brandStoryTitle": "自然之美\n献给你",
-    "brandStoryDesc": "BLOOMING是一个以自然为灵感，采用纯净成分打造的韩妆品牌。我们相信每一种肌肤都能绽放属于自己的美丽。",
+    "brandStoryDesc": "QINMU(沁木)是一个以自然为灵感，采用纯净成分打造的韩妆品牌。我们相信自然的深沉共鸣渗入肌肤，让每个人都能绽放属于自己的美丽。",
     "brandStoryPoint1": "100%纯素 & 零残忍",
     "brandStoryPoint2": "95%以上天然来源成分",
     "brandStoryPoint3": "皮肤科专家测试"
@@ -66,9 +66,9 @@
     "privacy": "隐私政策",
     "cs": "客服中心",
     "csHours": "工作日 09:00 - 18:00 (韩国时间)",
-    "email": "help@blooming.kr",
+    "email": "help@qinmu.kr",
     "phone": "+82-1588-0000",
-    "copyright": "© 2026 BLOOMING. All rights reserved.",
+    "copyright": "© 2026 QINMU 沁木國際. All rights reserved.",
     "address": "首尔特别市江南区德黑兰路123"
   },
   "product": {
@@ -92,7 +92,7 @@
     "socialLogin": "社交账号登录"
   },
   "about": {
-    "title": "BLOOMING 的故事",
+    "title": "QINMU 的故事",
     "mission": "我们的使命",
     "missionDesc": "以来自自然的纯净成分提供最好的护肤品，让每个人都能对自己的肌肤充满自信。",
     "values": "我们的价值观",
