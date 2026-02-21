@@ -91,7 +91,21 @@
     "hasAccount": "Already have an account?",
     "socialLogin": "Social Login",
     "signupSuccess": "Sign up successful!",
-    "signupConfirmEmail": "We sent a confirmation email. Please check your inbox."
+    "signupConfirmEmail": "We sent a confirmation email. Please check your inbox.",
+    "termsTitle": "Terms & Conditions",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "agreeTerms": "I agree to the Terms of Service",
+    "agreePrivacy": "I agree to the Privacy Policy",
+    "scrollToBottom": "Please scroll to the bottom",
+    "next": "Next",
+    "back": "Back",
+    "infoTitle": "Account Information",
+    "completeTitle": "Sign Up Complete",
+    "completeMessage": "Welcome! Your account has been created.",
+    "goHome": "Go to Home",
+    "termsContent": "Article 1 (Purpose)\nThese Terms govern the rights, obligations, and responsibilities between QINMU (hereinafter 'Company') and users regarding the use of services provided by the Company.\n\nArticle 2 (Definitions)\n1. 'Service' refers to all online services provided by the Company.\n2. 'User' refers to members and non-members who use the Service in accordance with these Terms.\n3. 'Member' refers to a person who has registered by providing personal information to the Company.\n\nArticle 3 (Effectiveness and Changes)\n1. These Terms apply to all users who wish to use the Service.\n2. The Company may amend these Terms as necessary, and amended Terms take effect after notice within the Service.\n\nArticle 4 (Provision of Service)\n1. The Company provides the following services:\n   - Product information and purchasing\n   - Member management\n   - Other services determined by the Company\n\nArticle 5 (Membership Registration)\n1. Users apply for membership in accordance with the procedures set by the Company.\n2. The Company registers users as members unless they fall under specific disqualifying conditions.",
+    "privacyContent": "1. Purpose of Collection and Use of Personal Information\nThe Company collects and uses personal information for the following purposes:\n- Membership registration and management: Member identification, membership services\n- Service provision: Product purchase, delivery, payment\n- Marketing and advertising: Event information, personalized services\n\n2. Items of Personal Information Collected\n- Required: Name, email address, password\n- Optional: Phone number, shipping address\n\n3. Retention Period\nPersonal information is retained until membership withdrawal. Where required by law, it is stored for the legally mandated period.\n- Records of contracts or subscription withdrawal: 5 years\n- Records of payment and supply of goods: 5 years\n- Records of consumer complaints or disputes: 3 years\n\n4. Provision to Third Parties\nThe Company does not provide personal information to external parties without user consent.\n\n5. User Rights\nUsers may view, modify, or delete their personal information at any time, and may request membership withdrawal."
   },
   "about": {
     "title": "The QINMU Story",
