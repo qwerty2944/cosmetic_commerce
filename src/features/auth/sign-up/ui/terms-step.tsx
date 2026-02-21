@@ -10,7 +10,7 @@ import { Button } from "@/shared/ui/button";
 import { cn } from "@/shared/lib/utils";
 
 interface TermsStepProps {
-  onNext: (agreed: { termsAgreed: boolean; privacyAgreed: boolean }) => void;
+  onNext: () => void;
 }
 
 export function TermsStep({ onNext }: TermsStepProps) {
@@ -147,7 +147,7 @@ export function TermsStep({ onNext }: TermsStepProps) {
         size="lg"
         className="w-full rounded-xl"
         disabled={!canProceed}
-        onClick={() => onNext({ termsAgreed: true, privacyAgreed: true })}
+        onClick={() => onNext()}
       >
         {t("next")}
       </Button>

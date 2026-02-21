@@ -1,5 +1,6 @@
 // 회원가입 기능 (POST mutation)
 // useUserStore의 상태를 변경하는 비동기 함수
+import { AxiosError } from "axios";
 import { authApi } from "@/shared/api";
 import { useUserStore } from "@/entities/user/store";
 
@@ -18,10 +19,9 @@ export async function signUp(
     return data.needsConfirmation ?? false;
   } catch (err: unknown) {
     const message =
-      err instanceof Error
-        ? err.message
-        : (err as { response?: { data?: { error?: string } } })?.response?.data
-            ?.error || "Signup failed";
+      err instanceof AxiosError
+        ? err.response?.data?.error ?? err.message
+        : "Signup failed";
     setError(message);
     throw err;
   } finally {
