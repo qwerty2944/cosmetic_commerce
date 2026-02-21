@@ -8,6 +8,19 @@ import { MobileNav } from "@/widgets/mobile-nav";
 import { SideBanner } from "@/widgets/side-banner";
 import { AppProviders } from "@/application";
 import "../globals.css";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    default: "QINMU | 沁木國際 — Premium K-Beauty",
+    template: "%s | QINMU",
+  },
+  description: "프리미엄 K-뷰티 브랜드 QINMU(沁木國際). 자연에서 영감을 받은 스킨케어.",
+  openGraph: {
+    siteName: "QINMU",
+    type: "website",
+  },
+};
 
 export default async function LocaleLayout({
   children,

@@ -1,95 +1,46 @@
-"use client";
+// 상품 목록 페이지 — 서버 컴포넌트 (SSR)
+import { Suspense } from "react";
+import { getTranslations } from "next-intl/server";
+import { getProducts } from "@/shared/lib/product-queries";
+import { ProductGrid } from "@/entities/product/ui/product-grid";
+import { ProductFilters } from "@/widgets/product-filters";
+import type { Metadata } from "next";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { SlidersHorizontal } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { ProductCard } from "@/entities/product";
-import { mockCategories } from "@/shared/lib/mock-data";
-import { useProductStore } from "@/entities/product/store";
-import { cn } from "@/shared/lib/utils";
+export const metadata: Metadata = {
+  title: "Products | QINMU",
+  description: "Premium K-Beauty products — 프리미엄 K-뷰티 상품",
+};
 
-export default function ProductsPage() {
-  const t = useTranslations();
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const { products, loading, fetchProducts } = useProductStore();
+export default async function ProductsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string; search?: string }>;
+}) {
+  const params = await searchParams;
+  const t = await getTranslations();
 
-  useEffect(() => {
-    fetchProducts(
-      selectedCategory ? { category_id: selectedCategory } : undefined
-    );
-  }, [selectedCategory, fetchProducts]);
+  const { products } = await getProducts({
+    category_id: params.category,
+    search: params.search,
+  });
 
   return (
     <div className="px-4 py-6">
       {/* Page Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="mb-8"
-      >
+      <div className="mb-8">
         <h1 className="text-xl font-bold text-foreground">
           {t("common.products")}
         </h1>
         <p className="text-subtext mt-1">{t("sections.bestSellersDesc")}</p>
-      </motion.div>
-
-      {/* Filters */}
-      <div className="flex items-center gap-3 mb-8 overflow-x-auto pb-2 scrollbar-hide">
-        <button className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-gray-200 text-sm whitespace-nowrap hover:border-primary hover:text-primary transition-colors">
-          <SlidersHorizontal className="w-4 h-4" />
-          Filter
-        </button>
-        <button
-          onClick={() => setSelectedCategory(null)}
-          className={cn(
-            "px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors",
-            !selectedCategory
-              ? "bg-primary text-white"
-              : "bg-gray-100 text-subtext hover:bg-gray-200"
-          )}
-        >
-          {t("common.all")}
-        </button>
-        {mockCategories.map((cat) => (
-          <button
-            key={cat.id}
-            onClick={() => setSelectedCategory(cat.id)}
-            className={cn(
-              "px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors",
-              selectedCategory === cat.id
-                ? "bg-primary text-white"
-                : "bg-gray-100 text-subtext hover:bg-gray-200"
-            )}
-          >
-            {t(`categories.${cat.slug}`)}
-          </button>
-        ))}
       </div>
 
-      {/* Product Grid */}
-      {loading ? (
-        <div className="grid grid-cols-2 gap-3">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div
-              key={i}
-              className="aspect-square rounded-2xl bg-gray-100 animate-pulse"
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="grid grid-cols-2 gap-3">
-          {products.map((product, idx) => (
-            <ProductCard key={product.id} product={product} index={idx} />
-          ))}
-        </div>
-      )}
+      {/* Filters (클라이언트) */}
+      <Suspense>
+        <ProductFilters />
+      </Suspense>
 
-      {!loading && products.length === 0 && (
-        <div className="text-center py-20">
-          <p className="text-subtext">No products found.</p>
-        </div>
-      )}
+      {/* Product Grid */}
+      <ProductGrid products={products} />
     </div>
   );
 }

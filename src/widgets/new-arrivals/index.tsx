@@ -1,23 +1,19 @@
+// 신상품 위젯 — props로 데이터 받아 렌더링
 "use client";
 
-import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Section } from "@/shared/ui/section";
 import { ProductCard } from "@/entities/product";
 import type { Product } from "@/entities/product/types";
-import { productsApi } from "@/shared/api";
 import { Link } from "@/application/i18n/routing";
 import { ArrowRight } from "lucide-react";
 
-export function NewArrivals() {
-  const t = useTranslations("sections");
-  const [products, setProducts] = useState<Product[]>([]);
+interface NewArrivalsProps {
+  products: Product[];
+}
 
-  useEffect(() => {
-    productsApi.list({ is_new: true }).then(({ data }) => {
-      setProducts(data.products);
-    });
-  }, []);
+export function NewArrivals({ products }: NewArrivalsProps) {
+  const t = useTranslations("sections");
 
   if (products.length === 0) return null;
 
