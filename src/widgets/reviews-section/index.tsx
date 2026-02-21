@@ -1,25 +1,12 @@
+// 리뷰 섹션 위젯 — 홈페이지 리뷰 목록 표시
 "use client";
 
 import { motion } from "framer-motion";
-import { Star, Quote } from "lucide-react";
+import { Quote } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Section } from "@/shared/ui/section";
+import { StarRating } from "@/entities/review/ui/star-rating";
 import { mockReviews } from "@/shared/lib/mock-data";
-
-function StarRating({ rating }: { rating: number }) {
-  return (
-    <div className="flex gap-0.5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          className={`w-3.5 h-3.5 ${
-            i < rating ? "fill-accent text-accent" : "text-gray-200"
-          }`}
-        />
-      ))}
-    </div>
-  );
-}
 
 export function ReviewsSection() {
   const t = useTranslations("sections");
@@ -47,7 +34,7 @@ export function ReviewsSection() {
                   <p className="text-sm font-medium text-foreground">
                     {review.user_name}
                   </p>
-                  <StarRating rating={review.rating} />
+                  <StarRating rating={review.rating} size="md" />
                 </div>
               </div>
               <Quote className="w-5 h-5 text-primary/20" />

@@ -18,14 +18,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
 
+    // 이메일 인증이 필요한 경우 user가 부분적으로 존재할 수 있음
     const needsConfirmation = !data.user?.email_confirmed_at;
 
     return NextResponse.json({
-      user: {
-        id: data.user?.id,
-        email: data.user?.email,
-        name: data.user?.user_metadata?.name,
-      },
+      user: data.user
+        ? {
+            id: data.user.id,
+            email: data.user.email ?? email,
+            name: data.user.user_metadata?.name ?? name,
+          }
+        : { id: "", email, name },
       needsConfirmation,
     });
   } catch {

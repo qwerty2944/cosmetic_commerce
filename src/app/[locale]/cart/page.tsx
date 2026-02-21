@@ -1,16 +1,15 @@
+// 장바구니 페이지
 "use client";
 
 import { motion } from "framer-motion";
-import { ShoppingBag } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/shared/ui/button";
-import { Link } from "@/application/i18n/routing";
 import { formatPrice } from "@/shared/lib/utils";
+import { EmptyCart } from "@/features/cart/manage-cart/ui/empty-cart";
 
 export default function CartPage() {
   const t = useTranslations("common");
 
-  // Empty cart state for now
   return (
     <div className="px-4 py-6">
       <motion.div
@@ -21,18 +20,10 @@ export default function CartPage() {
           {t("cart")}
         </h1>
 
-        {/* Empty Cart */}
-        <div className="text-center py-20">
-          <ShoppingBag className="w-16 h-16 mx-auto mb-4 text-gray-200" />
-          <p className="text-lg text-subtext mb-6">{t("emptyCart")}</p>
-          <Link href="/products">
-            <Button variant="default" className="rounded-full">
-              {t("continueShopping")}
-            </Button>
-          </Link>
-        </div>
+        {/* 빈 장바구니 */}
+        <EmptyCart />
 
-        {/* Cart Summary (hidden when empty, shown as template) */}
+        {/* 장바구니 요약 (비어있을 때 숨김, 템플릿으로 보존) */}
         <div className="hidden">
           <div className="border-t border-gray-100 pt-6 mt-6">
             <div className="flex justify-between items-center mb-4">
