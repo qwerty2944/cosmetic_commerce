@@ -8,18 +8,25 @@ import { BrandStory } from "@/widgets/brand-story";
 import { getProducts } from "@/shared/lib/product-queries";
 
 export default async function HomePage() {
-  const [bestSellersData, newArrivalsData] = await Promise.all([
-    getProducts({ is_best: true, limit: 8 }),
-    getProducts({ is_new: true, limit: 8 }),
-  ]);
+  let bestProducts: Awaited<ReturnType<typeof getProducts>> = { products: [], total: 0 };
+  let newProducts: Awaited<ReturnType<typeof getProducts>> = { products: [], total: 0 };
+
+  try {
+    [bestProducts, newProducts] = await Promise.all([
+      getProducts({ is_best: true, limit: 8 }),
+      getProducts({ is_new: true, limit: 8 }),
+    ]);
+  } catch (err) {
+    console.error("[HomePage] Failed to fetch products:", err);
+  }
 
   return (
     <>
       <HeroBanner />
       <CategoryNav />
-      <BestSellers products={bestSellersData.products} />
+      <BestSellers products={bestProducts.products} />
       <ReviewsSection />
-      <NewArrivals products={newArrivalsData.products} />
+      <NewArrivals products={newProducts.products} />
       <BrandStory />
     </>
   );

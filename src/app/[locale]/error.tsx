@@ -1,4 +1,4 @@
-// 전역 에러 바운더리 — 런타임 에러 발생 시 사용자에게 복구 옵션 제공
+// 전역 에러 바운더리 — 런타임 에러 발생 시 실제 에러 메시지 + 복구 옵션
 "use client";
 
 import { useEffect } from "react";
@@ -22,9 +22,14 @@ export default function ErrorPage({
       <h2 className="text-xl font-bold text-foreground mb-2">
         문제가 발생했습니다
       </h2>
-      <p className="text-sm text-subtext mb-8 max-w-xs">
-        일시적인 오류가 발생했습니다. 다시 시도해 주세요.
-      </p>
+      <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6 max-w-sm w-full text-left">
+        <p className="text-xs font-mono text-red-700 break-all">
+          {error.message || "Unknown error"}
+        </p>
+        {error.digest && (
+          <p className="text-xs text-red-400 mt-1">digest: {error.digest}</p>
+        )}
+      </div>
       <Button onClick={reset} className="rounded-full gap-2">
         <RefreshCw className="w-4 h-4" />
         다시 시도

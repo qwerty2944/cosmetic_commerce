@@ -17,24 +17,28 @@ export async function generateMetadata({
 }: {
   params: Promise<{ id: string; locale: string }>;
 }): Promise<Metadata> {
-  const { id, locale } = await params;
-  const product = await getProductById(id);
+  try {
+    const { id, locale } = await params;
+    const product = await getProductById(id);
 
-  if (!product) return {};
+    if (!product) return {};
 
-  const name = product.name[locale as Locale] || product.name.ko;
-  const description =
-    product.description?.[locale as Locale] || product.description?.ko;
+    const name = product.name[locale as Locale] || product.name.ko;
+    const description =
+      product.description?.[locale as Locale] || product.description?.ko;
 
-  return {
-    title: `${name} | QINMU`,
-    description,
-    openGraph: {
-      title: name,
+    return {
+      title: `${name} | QINMU`,
       description,
-      images: product.images?.[0] ? [product.images[0]] : [],
-    },
-  };
+      openGraph: {
+        title: name,
+        description,
+        images: product.images?.[0] ? [product.images[0]] : [],
+      },
+    };
+  } catch {
+    return {};
+  }
 }
 
 export default async function ProductDetailPage({

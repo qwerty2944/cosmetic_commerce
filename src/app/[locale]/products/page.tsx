@@ -19,10 +19,17 @@ export default async function ProductsPage({
   const params = await searchParams;
   const t = await getTranslations();
 
-  const { products } = await getProducts({
-    category_id: params.category,
-    search: params.search,
-  });
+  let products: Awaited<ReturnType<typeof getProducts>>["products"] = [];
+
+  try {
+    const result = await getProducts({
+      category_id: params.category,
+      search: params.search,
+    });
+    products = result.products;
+  } catch (err) {
+    console.error("[ProductsPage] Failed to fetch products:", err);
+  }
 
   return (
     <div className="px-4 py-6">
